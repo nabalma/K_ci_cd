@@ -1,0 +1,28 @@
+# ASP.NET Core / .NET
+bin/
+obj/
+*.user
+*.suo
+*.csproj.user
+
+# Docker
+*.env
+docker-compose.override.yml
+
+# Logs
+*.log
+
+# Node / React / Angular
+node_modules/
+dist/
+.env
+.env.*
+
+# VSCode / IDE
+.vscode/
+.idea/
+
+# Others
+publish/
+coverage/
+TestResults/

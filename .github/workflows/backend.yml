@@ -1,0 +1,58 @@
+name: Backend CI
+
+on:
+  push:
+    paths:
+      - 'backEnd/**'
+      - '.github/workflows/backend.yml'
+    branches: [ main, dev ]
+  pull_request:
+    branches: [ main, dev ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    env:
+      DOTNET_VERSION: '8.0.x'
+      IMAGE_NAME: kolyya-backend # 👈 Change si tu veux
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🧰 Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: 📦 Restore dependencies
+        run: dotnet restore ./backEnd
+
+      - name: 🧪 Run tests
+        run: dotnet test ./backEnd --no-restore --verbosity normal
+
+      - name: 🏗️ Build and publish
+        run: dotnet publish ./backEnd -c Release -o ./publish
+
+      - name: 🐳 Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: 🐳 Build Docker image
+        run: |
+          docker build \
+            -f backEnd/Dockerfile \
+            -t ${{ env.IMAGE_NAME }}:ci-${{ github.sha }} \
+            .
+
+      # ❗️Optionnel : Push to DockerHub (à faire plus tard avec secrets)
+      # - name: 🔐 Log in to Docker Hub
+      #   uses: docker/login-action@v3
+      #   with:
+      #     username: ${{ secrets.DOCKERHUB_USERNAME }}
+      #     password: ${{ secrets.DOCKERHUB_TOKEN }}
+      #
+      # - name: 🚀 Push image to Docker Hub
+      #   run: |
+      #     docker tag ${{ env.IMAGE_NAME }}:ci-${{ github.sha }} yourusername/${{ env.IMAGE_NAME }}:latest
+      #     docker push yourusername/${{ env.IMAGE_NAME }}:latest

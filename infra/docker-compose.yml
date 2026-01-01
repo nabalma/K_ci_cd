@@ -1,0 +1,43 @@
+version: '3.9'
+
+services:
+  backend:
+    build:
+      context: ../
+      dockerfile: backEnd/Dockerfile
+    container_name: backend
+    ports:
+      - "5000:5000"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - POSTGRES_CONN=${POSTGRES_CONN}
+    depends_on:
+      - db
+    networks:
+      - kolyya-net
+
+  db:
+    image: postgres:15
+    container_name: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - kolyya-net
+
+networks:
+  kolyya-net:
+
+volumes:
+  pgdata:
+
+#
+#cd infra
+#docker compose --env-file env/dev.env up --build
+#Tu devrais voir ton backend ASP.NET démarrer sur http://localhost:5000 🚀
