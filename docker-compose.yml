@@ -1,0 +1,38 @@
+services:
+  kolyya.backend:
+    build:
+      context: ./backEnd/Kolyya.Api
+    container_name: kolyya.backend
+    ports:
+      - "5000:80"
+    depends_on:
+      - kolyya.db
+    env_file:
+      - ./infra/env/dev.env
+    networks:
+      - kolyya-net
+
+  kolyya.db:
+    image: postgres:15
+    container_name: kolyya.db
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - kolyya-net
+
+volumes:
+  postgres_data:
+
+networks:
+  kolyya-net:
+#
+#cd infra
+#docker compose --env-file env/dev.env up --build
+#Tu devrais voir ton backend ASP.NET démarrer sur http://localhost:5000 🚀
