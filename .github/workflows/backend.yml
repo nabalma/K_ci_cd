@@ -2,12 +2,23 @@ name: Backend CI
 
 on:
   push:
-    paths:
-      - "backEnd/**"
-      - ".github/workflows/backend.yml"
     branches: [main, dev]
+    paths:
+      - 'backEnd/**'
+      - 'infra/**'
+      - 'docker-compose.yml'
+      - '.env'
+      - '.github/workflows/backend.yml'
+     
   pull_request:
     branches: [main, dev]
+    paths:
+      - 'backEnd/**'
+      - 'infra/**'
+      - 'docker-compose.yml'
+      - '.env'
+      - '.github/workflows/backend.yml'
+    
 
 jobs:
   build-and-test:
