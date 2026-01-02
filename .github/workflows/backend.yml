@@ -15,7 +15,7 @@ jobs:
 
     env:
       DOTNET_VERSION: '8.0.x'
-      IMAGE_NAME: kolyya-backend # 👈 Change si tu veux
+      IMAGE_NAME: kolyya-backend 
 
     steps:
       - name: 📥 Checkout code
