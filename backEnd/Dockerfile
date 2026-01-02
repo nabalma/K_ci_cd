@@ -7,6 +7,8 @@ COPY backEnd/Kolyya.sln ./
 
 # Copier le projet API
 COPY backEnd/Kolyya.Api/Kolyya.Api.csproj ./Kolyya.Api/
+COPY backEnd/Kolyya.Api.Tests/Kolyya.Api.Tests.csproj ./Kolyya.Api.Tests/
+
 
 # Restaurer les dépendances
 RUN dotnet restore
