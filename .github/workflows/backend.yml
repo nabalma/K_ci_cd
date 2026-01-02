@@ -30,7 +30,7 @@ jobs:
         run: dotnet restore ./backEnd
 
       - name: Lint (code style check)
-        run: dotnet format ./backEnd/Kolyya.Api.csproj --verify-no-changes --severity error
+        run: dotnet format ./Kolyya.sln --verify-no-changes --severity error
 
       - name: 🧪 Run tests
         run: dotnet test ./backEnd --no-restore --verbosity normal
