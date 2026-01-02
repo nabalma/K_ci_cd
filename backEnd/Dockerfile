@@ -2,14 +2,20 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
-# Copier les fichiers projet et restaurer les dépendances
-COPY *.sln .
-COPY backEnd/*.csproj ./backEnd/
+# Copier la solution
+COPY backEnd/Kolyya.sln ./
+
+# Copier le projet API
+COPY backEnd/Kolyya.Api/Kolyya.Api.csproj ./Kolyya.Api/
+
+# Restaurer les dépendances
 RUN dotnet restore
 
-# Copier tout le code et compiler
-COPY backEnd/. ./backEnd/
-WORKDIR /app/backEnd
+# Copier le reste du code
+COPY backEnd/Kolyya.Api/. ./Kolyya.Api/
+
+# Publier l'application
+WORKDIR /app/Kolyya.Api
 RUN dotnet publish -c Release -o /app/publish
 
 # -------- STAGE 2 : runtime --------
@@ -17,7 +23,5 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
 COPY --from=build /app/publish .
 
-# Expose le port utilisé par le backend
-EXPOSE 5000
-
-ENTRYPOINT ["dotnet", "backEnd.dll"]
+EXPOSE 80
+ENTRYPOINT ["dotnet", "Kolyya.Api.dll"]

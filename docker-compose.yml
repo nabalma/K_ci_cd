@@ -3,16 +3,18 @@ version: "3.8"
 services:
   backend:
     build:
-      context: . # tout le projet est visible
-      dockerfile: backEnd/Dockerfile # chemin réel du Dockerfile backend
+      context: . # Le contexte part de la racine du projet
+      dockerfile: backEnd/Dockerfile # Le Dockerfile est bien dans backEnd/
     image: kolyya-backend
     ports:
-      - "5000:80"
+      - "5000:8080" # On expose le port du container vers l'hôte
     depends_on:
       - db
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=${POSTGRES_CONN}
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__DefaultConnection: ${POSTGRES_CONN}
+    networks:
+      - kolyya-network
 
   db:
     image: postgres:16
@@ -24,6 +26,12 @@ services:
       - postgres-data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    networks:
+      - kolyya-network
 
 volumes:
   postgres-data:
+
+networks:
+  kolyya-network:
+    driver: bridge
