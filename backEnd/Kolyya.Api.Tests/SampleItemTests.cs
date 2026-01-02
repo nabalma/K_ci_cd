@@ -1,7 +1,7 @@
 using Xunit;
 using FluentAssertions;
 using Kolyya.Api;
-using Kolyya.Api.Models; 
+using Kolyya.Api.Models;
 
 namespace Kolyya.Api.Tests
 {
