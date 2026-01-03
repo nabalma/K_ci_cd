@@ -1,0 +1,15 @@
+<div
+  class="image"
+  [style.background-image]="'url(' + imageUrl() + ')'"
+  role="img"
+  aria-label="{{ title() }}"
+></div>
+
+<div class="content">
+  <h2>{{ title() }}</h2>
+  <p>{{ description() }}</p>
+</div>
+
+@if (hasTag()) {
+  <div class="tag">{{ tag() }}</div>
+}
