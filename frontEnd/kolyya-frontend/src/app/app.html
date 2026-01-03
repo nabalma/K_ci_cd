@@ -2,7 +2,7 @@
 
 <div class="cards-container">
   @for (site of touristicSites(); track site.title) {
-    <touristic-card
+    <app-touristic-card
   [title]="site.title"
   [description]="site.description"
   [imageUrl]="site.imageUrl"

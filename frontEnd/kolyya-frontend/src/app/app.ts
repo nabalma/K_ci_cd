@@ -1,4 +1,4 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TouristicCardComponent } from '../components/touristic-card.component/touristic-card.component';
 
@@ -24,19 +24,16 @@ export class AppComponent {
       title: 'Santorin, Grèce',
       description: 'Maisons blanches, couchers de soleil sublimes et mer Égée turquoise.',
       imageUrl: 'assets/images/santorini.jpg',
-     
     },
     {
       title: 'Kyoto, Japon',
       description: 'Temples anciens, cerisiers en fleurs et traditions ancestrales.',
       imageUrl: 'assets/images/kyoto.jpg',
-     
     },
     {
       title: 'Bora Bora, Polynésie',
       description: 'Lagons bleus, bungalows sur l’eau et détente absolue.',
       imageUrl: 'assets/images/borabora.jpg',
-     
     },
     {
       title: 'Petra, Jordanie',
@@ -47,7 +44,6 @@ export class AppComponent {
       title: 'Machu Picchu, Pérou',
       description: 'Vestiges incas perchés dans les Andes avec vue spectaculaire.',
       imageUrl: 'assets/images/machu.jpg',
-      
     },
   ];
 

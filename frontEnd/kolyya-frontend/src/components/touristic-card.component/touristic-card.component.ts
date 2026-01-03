@@ -2,12 +2,11 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
-  signal,
   input,
 } from '@angular/core';
 
 @Component({
-  selector: 'touristic-card',
+  selector: 'app-touristic-card',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './touristic-card.component.html',
