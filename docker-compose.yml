@@ -29,6 +29,18 @@ services:
     networks:
       - kolyya-network
 
+  frontend:
+    build:
+      context: ./frontEnd/kolyya-frontend
+      dockerfile: Dockerfile
+    image: kolyya-frontend
+    ports:
+      - "3000:80" # Accessible via http://localhost:3000
+    networks:
+      - kolyya-network
+    depends_on:
+      - backend
+
 volumes:
   postgres-data:
 
