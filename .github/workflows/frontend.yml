@@ -52,6 +52,7 @@ jobs:
       - name: Build Docker image
         run: docker build -t $IMAGE_NAME:$IMAGE_TAG .
 
+# To come : Optionnel : Push to DockerHub (à faire plus tard avec secrets)
       # - name: Log in to Docker Hub (décommenter pour déploiement)
       #   uses: docker/login-action@v2
       #   with:
