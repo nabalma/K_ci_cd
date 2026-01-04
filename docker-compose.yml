@@ -3,16 +3,23 @@ version: "3.8"
 services:
   backend:
     build:
-      context: . # Le contexte part de la racine du projet
-      dockerfile: backEnd/Dockerfile # Le Dockerfile est bien dans backEnd/
+      context: .
+      dockerfile: backEnd/Dockerfile
     image: kolyya-backend
     ports:
-      - "5000:8080" # On expose le port du container vers l'hôte
+      - "5000:8080"
     depends_on:
-      - db
+      db:
+        condition: service_started
+      rabbitmq:
+        condition: service_healthy
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-      ConnectionStrings__DefaultConnection: ${POSTGRES_CONN}
+      POSTGRES_CONN: ${POSTGRES_CONN}
+      RABBITMQ_HOST: rabbitmq
+      RABBITMQ_USERNAME: ${RABBITMQ_USER}
+      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
+      RABBITMQ_VHOST: /
     networks:
       - kolyya-network
 
@@ -29,13 +36,30 @@ services:
     networks:
       - kolyya-network
 
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "${RABBITMQ_PORT:-5672}:5672"
+      - "${RABBITMQ_MANAGEMENT_PORT:-15672}:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - kolyya-network
+
   frontend:
     build:
       context: ./frontEnd/kolyya-frontend
       dockerfile: Dockerfile
     image: kolyya-frontend
     ports:
-      - "3000:80" # Accessible via http://localhost:3000
+      - "3000:80"
     networks:
       - kolyya-network
     depends_on:

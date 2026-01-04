@@ -1,7 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
 :host {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
   width: 100%;
   max-width: 360px;
   border-radius: 16px;
@@ -30,21 +33,57 @@
   }
 }
 
-.content {
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  flex-grow: 1;
   padding: 16px;
+  box-sizing: border-box;
+}
+
+.content {
+  flex-grow: 1;
 
   h2 {
-    margin: 0 0 8px;
+    margin: 0 10px 8px;
     font-size: 1.4rem;
     font-weight: 600;
     color: #1a1a1a;
   }
 
   p {
-    margin: 0;
+    margin: 10px;
     color: #555;
     font-size: 1rem;
     line-height: 1.4;
+  }
+}
+
+.order-btn-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+  margin-bottom: 5px;
+}
+
+.order-button {
+  background-color: #f28b82; // rouge doux
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+
+  &:hover {
+    background-color: #d32f2f; // rouge plus pur
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
   }
 }
 

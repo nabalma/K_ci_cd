@@ -1,15 +1,25 @@
-<div
-  class="image"
-  [style.background-image]="'url(' + imageUrl() + ')'"
-  role="img"
-  aria-label="{{ title() }}"
-></div>
 
-<div class="content">
-  <h2>{{ title() }}</h2>
-  <p>{{ description() }}</p>
-</div>
+  <div
+    class="image"
+    [style.background-image]="'url(' + imageUrl() + ')'"
+    role="img"
+    [attr.aria-label]="title()"
+  ></div>
 
-@if (hasTag()) {
-  <div class="tag">{{ tag() }}</div>
-}
+  <div class="card-content">
+    <div class="content">
+      <h2>{{ title() }}</h2>
+      <p>{{ description() }}</p>
+    </div>
+
+    <div class="order-btn-wrapper">
+      <button type="button" class="order-button" (click)="orderCard()">
+        Order
+      </button>
+    </div>
+  </div>
+
+  @if (hasTag()) {
+    <div class="tag">{{ tag() }}</div>
+  }
+

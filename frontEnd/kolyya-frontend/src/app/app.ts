@@ -22,7 +22,7 @@ export class AppComponent {
   private readonly sitesData: TouristicSite[] = [
     {
       title: 'Santorin, Grèce',
-      description: 'Maisons blanches, couchers de soleil sublimes et mer Égée turquoise.',
+      description: 'Maisons blanches, couchers de soleil sublimes et mer Égée.',
       imageUrl: 'assets/images/santorini.jpg',
     },
     {
@@ -37,12 +37,12 @@ export class AppComponent {
     },
     {
       title: 'Petra, Jordanie',
-      description: 'Cité rose sculptée dans la roche, une merveille du monde.',
+      description: 'Cité rose sculptée dans la roche, une merveille.',
       imageUrl: 'assets/images/petra.jpg',
     },
     {
       title: 'Machu Picchu, Pérou',
-      description: 'Vestiges incas perchés dans les Andes avec vue spectaculaire.',
+      description: 'Vestiges incas perchés dans les Andes avec belle vue.',
       imageUrl: 'assets/images/machu.jpg',
     },
   ];
