@@ -85,5 +85,6 @@ Le consumer (`TouristicCardOrderedConsumer`) traite ces commandes sans bloquer l
 
 Projet mené dans le cadre d’un apprentissage DevOps complet.  
 Contient des composants modernes, légers et extensibles.
-
+Par Ousseynou Nabalma
 ---
+
